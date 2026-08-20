@@ -1,4 +1,6 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { useRouter } from 'expo-router';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+
 type LocationCardProps = {
     name: string;
     rating: number;
@@ -6,10 +8,11 @@ type LocationCardProps = {
 };
 
 export default function LocationCard({name,rating,imageUrl} : LocationCardProps){
-    
+    const router = useRouter();
     return (
         
-        <View style={styles.card}>
+        <TouchableOpacity style={styles.card} onPress={() =>{ console.log("Card was tapped!");router.push({pathname: "/details",
+    params: { name, rating, imageUrl }})}}>
             <Image style={styles.image} source={{uri : imageUrl}}>
                 
             </Image>
@@ -23,7 +26,7 @@ export default function LocationCard({name,rating,imageUrl} : LocationCardProps)
             </View>
             
             
-        </View>
+        </TouchableOpacity>
     )
     
 };
@@ -31,15 +34,16 @@ export default function LocationCard({name,rating,imageUrl} : LocationCardProps)
 const styles = StyleSheet.create({
     card : {
         
-        justifyContent: 'space-between',
+        
         backgroundColor: '#eeeeee',   
         padding: 16,
     },
     image : {
-        width : '100%',
+        width : '50%',
         height : 200
     },
     infoLocation:{
+        justifyContent: 'space-between',
         flexDirection: 'row'
     }
 })
