@@ -1,28 +1,31 @@
 import { useRouter } from 'expo-router';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-type LocationCardProps = {
-    name: string;
-    rating: number;
-    imageUrl : string
+type LocationData = {
+  id: number | string,
+  title: string,
+  description : string,
+  eventUrl : string,
+  startDate : string,
+  endDate : string,
+  imageUrl: string,
+  address : string
 };
 
-export default function LocationCard({name,rating,imageUrl} : LocationCardProps){
+export default function LocationCard({id,title,description,eventUrl,startDate,endDate,imageUrl,address} : LocationData){
     const router = useRouter();
     return (
         
         <TouchableOpacity style={styles.card} onPress={() =>{ console.log("Card was tapped!");router.push({pathname: "/details",
-    params: { name, rating, imageUrl }})}}>
+    params: {id,title,description,eventUrl,startDate,endDate,imageUrl,address}})}}>
             <Image style={styles.image} source={{uri : imageUrl}}>
                 
             </Image>
             <View style={styles.infoLocation}>
                 <Text>
-                    {name}
+                    {title}
                 </Text>
-                <Text>
-                    {rating}
-                </Text>
+                
             </View>
             
             
@@ -35,15 +38,22 @@ const styles = StyleSheet.create({
     card : {
         
         
-        backgroundColor: '#eeeeee',   
-        padding: 16,
+        backgroundColor: '#eeeeee',
+        elevation: 3,
+        marginBottom: 20,
+        borderRadius: 25,
+       marginHorizontal: 10
+
     },
     image : {
-        width : '50%',
-        height : 200
+        width : '100%',
+        height : 200,
+        borderRadius: 25,
+        
     },
     infoLocation:{
         justifyContent: 'space-between',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        padding: 16
     }
 })
