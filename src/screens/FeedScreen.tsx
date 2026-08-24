@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { ActivityIndicator, FlatList, RefreshControl, Text, TextInput, View } from "react-native";
+import { ActivityIndicator, FlatList, RefreshControl, ScrollView, Text, TextInput, View } from "react-native";
 import { FavoritesContext } from "../app/_layout";
 import LocationCard from "../components/LocationCard";
 import { useLocations } from '../hooks/useLocations';
@@ -9,7 +9,7 @@ import { useLocations } from '../hooks/useLocations';
 
 
 export default function FeedScreen(){
-    const {locations,isLoading,error,fetchLocations,loadMore} = useLocations()
+    const {locations,isLoading,error,fetchLocations,loadMore,setOffset,setError} = useLocations()
 
     const [searchQuery,setSearchQuery] = useState("")
     
@@ -18,15 +18,17 @@ export default function FeedScreen(){
     
     async function  handleRefresh(){
         setIsRefreshing(true);
+        setOffset(0)
+        setError(null);
         await fetchLocations();
         setIsRefreshing(false);
     }
     const filteredLocations = locations.filter(el => el.title.toLowerCase().includes(searchQuery.toLowerCase()))
 
     if(error){
-        return <View>
+        return <ScrollView refreshControl= {<RefreshControl refreshing ={isRefreshing} onRefresh={handleRefresh} />}>
           <Text>{error}</Text>  
-        </View>
+        </ScrollView>
     }
 
     if(!(isLoading && locations.length==0)){

@@ -27,9 +27,16 @@ export function useLocations(){
         
         return  fetch(`https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/que-faire-a-paris-/records?limit=20&offset=${offset}`).
                 then(response => response.json()).
-                then((data) =>{let tempLocations = data["results"].map(
-                    (item :any) => ({id :item.id,title:item.title,description : item.lead_text,eventUrl:item.url,startDate : item.date_start,endDate : item.date_end,imageUrl:item.cover_url,address : item.address_street+" "+item.address_zipcode+" "+item.address_city }));
-                    ;setLocations(prevLocations=>[...prevLocations, ...tempLocations]);setIsLoading(false)
+                then((data) =>{let tempLocations =
+                    data["results"].map((item :any) =>
+                        ({id :item.id,title:item.title,description : item.lead_text,eventUrl:item.url,startDate : item.date_start,endDate : item.date_end,imageUrl:item.cover_url,address : item.address_street+" "+item.address_zipcode+" "+item.address_city }));
+                    if(offset!=0){
+                    setLocations(prevLocations=>[...prevLocations, ...tempLocations]);setIsLoading(false)}
+                    else{
+                        setLocations([...tempLocations]);setIsLoading(false)
+                    }
+
+
                 }).catch(err =>{
                     setError("Failed to fetch data")
                     setIsLoading(false)
@@ -38,6 +45,6 @@ export function useLocations(){
     useEffect(()=>{fetchLocations()},[offset])
 
     
-    return {locations,isLoading,error,fetchLocations,loadMore,  }
+    return {locations,isLoading,error,fetchLocations,loadMore,setOffset,setError  }
         
 }
