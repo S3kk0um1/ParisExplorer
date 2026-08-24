@@ -9,11 +9,14 @@ type LocationData = {
   startDate : string,
   endDate : string,
   imageUrl: string,
-  address : string
+  address : string,
+  isFavorite : boolean,
+  toggleFavorite : Function
 };
 
-export default function LocationCard({id,title,description,eventUrl,startDate,endDate,imageUrl,address} : LocationData){
+export default function LocationCard({id,title,description,eventUrl,startDate,endDate,imageUrl,address,isFavorite,toggleFavorite} : LocationData){
     const router = useRouter();
+    
     return (
         
         <TouchableOpacity style={styles.card} onPress={() =>{ console.log("Card was tapped!");router.push({pathname: "/details",
@@ -25,7 +28,7 @@ export default function LocationCard({id,title,description,eventUrl,startDate,en
                 <Text>
                     {title}
                 </Text>
-                
+                <TouchableOpacity onPress={()=>toggleFavorite(id)}><Text>{isFavorite ? '❤️' : '🤍'}</Text></TouchableOpacity>
             </View>
             
             

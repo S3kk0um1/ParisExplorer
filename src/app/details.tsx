@@ -1,13 +1,18 @@
 import { Stack, useLocalSearchParams } from 'expo-router';
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import { useContext } from 'react';
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { FavoritesContext } from "../app/_layout";
 
 export default function DetailsScreen(){
     const { id,title,description,eventUrl,startDate,endDate,imageUrl,address }  = useLocalSearchParams();
+    const { favorites, toggleFavorite } = useContext(FavoritesContext);
     return(
         <>
         <Stack.Screen options={{title : title.toString()}}/>
             <ScrollView style={styles.infoContainer}>
                 <Text style={styles.title}>{ title}</Text>
+                <TouchableOpacity onPress={()=>toggleFavorite(id.toString())}><Text>{favorites.includes(id.toString()) ? '❤️' : '🤍'}</Text></TouchableOpacity>
+                
                 <Image style={styles.image} source={{uri : imageUrl.toString()}}></Image>
                 <Text style={styles.label}>Site web : </Text>
                 <Text style={styles.details}>{eventUrl} </Text>
