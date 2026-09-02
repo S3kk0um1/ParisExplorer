@@ -16,6 +16,7 @@ export default function FeedScreen(){
     
     const [isRefreshing,setIsRefreshing] = useState(false)
     const { favorites, toggleFavorite } = useContext(FavoritesContext);
+
     
     async function  handleRefresh(){
         setIsRefreshing(true);
