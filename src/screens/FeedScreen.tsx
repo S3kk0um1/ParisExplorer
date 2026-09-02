@@ -1,3 +1,4 @@
+import { Link } from 'expo-router';
 import { useContext, useState } from 'react';
 import { ActivityIndicator, FlatList, RefreshControl, ScrollView, Text, TextInput, View } from "react-native";
 import { FavoritesContext } from "../app/_layout";
@@ -35,8 +36,9 @@ export default function FeedScreen(){
 
     return (
         <View style={{ flex: 1 }}>
+            <Link href="/favorites">Mes Favoris ⭐</Link>
             <TextInput value={searchQuery} onChangeText={setSearchQuery} placeholder="Search locations"/>
-                <FlatList 
+            <FlatList 
                 data= {filteredLocations}
                 renderItem={({item})=><LocationCard  {...item} isFavorite = {favorites.includes(item.id.toString())} toggleFavorite={toggleFavorite}></LocationCard> }
                 keyExtractor={(item) => item.id.toString()} 
@@ -45,7 +47,7 @@ export default function FeedScreen(){
                 onEndReached = {loadMore}
                 ListFooterComponent= { isLoading ? <ActivityIndicator size="large"/>:null}
                 >
-                </FlatList>
+            </FlatList>
 
                 
         </View>

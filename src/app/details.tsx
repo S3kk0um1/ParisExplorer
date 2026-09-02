@@ -15,21 +15,21 @@ export default function DetailsScreen(){
                 
                 <Image style={styles.image} source={{uri : imageUrl.toString()}}></Image>
                 <Text style={styles.label}>Site web : </Text>
-                <Text style={styles.details}>{eventUrl} </Text>
+                <Text style={styles.details}>{eventUrl? eventUrl:"not available"} </Text>
                 <View style={styles.divider}/>
                 <Text style={styles.label}>Date de début : </Text>
-                <Text style={styles.details}>{ new Date(startDate.toString()).toLocaleDateString() } </Text>
+                <Text style={styles.details}>{ startDate ? new Date(startDate.toString()).toLocaleDateString():"not available" } </Text>
                 <View style={styles.divider}/>
                 <Text style={styles.label}>Date de fin : </Text>
-                <Text style={styles.details}>{new Date(endDate.toString()).toLocaleDateString() } </Text>
+                <Text style={styles.details}>{endDate? new Date(endDate.toString()).toLocaleDateString():"not available" } </Text>
                 <View style={styles.divider}/>
 
                 <Text style={styles.label}>Adresse : </Text>
-                <Text style={styles.details}>{address} </Text>
+                <Text style={styles.details}>{address?address:"not available"} </Text>
                 <View style={styles.divider}/>
 
                 <Text style={styles.label}>Description : </Text>
-                <Text style = {styles.descriptionText}>{description}</Text>
+                <Text style = {styles.descriptionText}>{description ? description : "not available"}</Text>
         </ScrollView>
     </>
      )
