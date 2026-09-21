@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { FlatList, Text } from "react-native";
+import { ActivityIndicator, FlatList, Text } from "react-native";
 import { FavoritesContext } from "../app/_layout";
 import LocationCard from "../components/LocationCard";
 import { useLocations } from '../hooks/useLocations';
@@ -10,6 +10,9 @@ export default function FavoritesScreen(){
 
     const favoritesLocations = locations.filter(el => favorites.includes(el.id.toString()))
 
+    if(isLoading){
+       return  <ActivityIndicator/>
+    }
     return <FlatList
     data = {favoritesLocations}
     renderItem={({item})=><LocationCard  {...item} isFavorite = {favorites.includes(item.id.toString())} toggleFavorite={toggleFavorite}></LocationCard> }

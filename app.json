@@ -17,7 +17,7 @@
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false ,
+      "predictiveBackGestureEnabled": false,
       "package": "com.app.cityexplorer"
     },
     "web": {
@@ -38,6 +38,12 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "c028af84-7576-41ab-a588-9b2700fce06e"
+      }
     }
   }
 }
