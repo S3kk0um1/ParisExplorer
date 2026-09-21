@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "CityExplorer",
-    "slug": "CityExplorer",
+    "name": "ParisExplorer",
+    "slug": "ParisExplorer",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "cityexplorer",
+    "scheme": "parisexplorer",
     "userInterfaceStyle": "automatic",
     "ios": {
       "icon": "./assets/expo.icon"
@@ -18,7 +18,7 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.app.cityexplorer"
+      "package": "com.app.parisexplorer"
     },
     "web": {
       "output": "static",
